@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Yahtzee Executor",
+    "name": "Yahtzee Evaluator",
     "version": "1.0",
     "description": "Evaluate positions in Cardgames.io's Yahtzee game.",
     "action": {
