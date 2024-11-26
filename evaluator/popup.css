@@ -1,0 +1,134 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #302e2b;
+    color: #f0f0f0;
+}
+
+.content-wrapper.vertical {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.diff {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 20px 2px;
+}
+
+.header {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin: 20px 2px;
+}
+
+.header.vertical,
+.diff.vertical {
+    height: 40px;
+}
+
+#floatButton {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    padding: 10px 10px;
+    background-color: transparent;
+    color: #f0f0f0;
+    border: none;
+}
+
+.bi {
+    font-size: 16px;
+}
+
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar {
+    background-color: #302e2b;
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px;
+}
+
+.progress-bar.horizontal {
+    width: 500px;
+    height: 35px;
+    flex-direction: row;
+}
+
+.progress-bar.vertical {
+    width: 35px;
+    height: 610px;
+    flex-direction: column;
+    background-color: #302e2b;
+}
+
+.level-bar.horizontal {
+    transition: width 1s ease;
+    width: 200px;
+    height: 100%;
+}
+
+.level-bar.vertical {
+    transition: height 1s ease;
+    height: 250px;
+    width: 100%;
+}
+
+#white-level-bar {
+    background-color: #f0f0f0;
+}
+
+#black-level-bar {
+    background-color: #454545;
+}
+
+.level-text {
+    font-weight: 600;
+    display: flex;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.level-text.horizontal {
+    width: 35px;
+}
+
+.level-text.vertical {
+    height: 35px;
+    flex-direction: column;
+}
+
+#white-level-text {
+    color: #454545;
+    background-color: #f0f0f0;
+}
+
+#black-level-text {
+    color: #f0f0f0;
+    background-color: #454545;
+}
+
+#black-level-text.horizontal {
+    flex-direction: row-reverse;
+}
+
+#white-level-text.vertical {
+    flex-direction: column;
+    align-items: center;
+}
+
+#black-level-text.vertical {
+    flex-direction: column-reverse;
+    align-items: center;
+}

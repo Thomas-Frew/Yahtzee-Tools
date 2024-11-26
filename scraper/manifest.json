@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Yahtzee Scraper",
+    "version": "1.0",
+    "description": "Scrape data from Cardgames.io's Yahtzee game.",
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://cardgames.io/yahtzee"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://cardgames.io/yahtzee"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "icons": {
+        "128": "logo-128.png"
+    }
+}

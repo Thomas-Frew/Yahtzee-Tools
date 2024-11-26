@@ -1,0 +1,38 @@
+{
+    "manifest_version": 3,
+    "name": "Yahtzee Executor",
+    "version": "1.0",
+    "description": "Evaluate positions in Cardgames.io's Yahtzee game.",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128": "logo-128.png"
+        }
+    },
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://cardgames.io/yahtzee",
+        "http://localhost/*",
+        "https://localhost/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://cardgames.io/yahtzee"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "icons": {
+        "128": "logo-128.png"
+    }
+}
