@@ -1,0 +1,4 @@
+*.psd
+*__pycache__*
+*.pkl
+*.keras
