@@ -1,5 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import numpy as np
+import pandas as pd
 import joblib
 
 column_names = ["ID", "Ones", "Twos", "Threes", "Fours", "Fives", "Sixes", "Total", "Bonus", "3 of a Kind", "4 of a Kind", "Full House", "Small Straight", "Large Straight", "Chance", "Yahtzee", "Score"]
@@ -47,7 +49,9 @@ def mask_data(df):
         df[f'{column} Mask'] = df[column].isna().astype(float)
     return df
 
-def impute_nans(df):
-    """Replace NaN values in a DataFrame with a specific (standard) value."""
-    df = df.fillna(nan_value)
+def impute_nans(df, seed = None):
+    """Replace NaN values in a DataFrame with a random value."""
+    if seed != None:
+        np.random.seed(seed)
+    df = df.map(lambda x: np.random.rand() if pd.isna(x) else x)
     return df

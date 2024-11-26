@@ -25,7 +25,7 @@ def process_data(data):
     
     # Impute NaNs
     df = dp.mask_data(df)
-    df = dp.impute_nans(df)
+    df = dp.impute_nans(df, 42)
     
     # Split and scale the data 
     df, _ = dp.split_xy(df)
@@ -56,7 +56,8 @@ def save_checkpoint_history():
         file.write(data)
         
     shutil.copy(dataset_name, f"backup/{time.time()}-{dataset_name}")
-    return 200
+    res = jsonify(success=True)
+    return res
 
 if __name__ == '__main__':
     CORS(app)
