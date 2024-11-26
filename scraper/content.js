@@ -11,24 +11,6 @@ const tableSelector = "#scorecard"
 const messageSelector = "#messageBox"
 const totalSelector = "#total-score"
 
-chrome.storage.local.get([storageKey], (result) => {
-    console.log("Existing checkpoint histories: ", result[storageKey])
-})
-/**
- * Append some data to some array in Chrome's storage. 
- */
-function appendToStorageArray(key, array) {
-    chrome.storage.local.get([key], (result) => {
-        let existingArray = result[key] || []
-
-        existingArray = existingArray.concat(array)
-
-        chrome.storage.local.set({ [key]: existingArray }, () => {
-            console.log("Array updated successfully:", existingArray)
-        })
-    })
-}
-
 /**
  * Log a snapshot of the scorecard.
  */
@@ -50,24 +32,23 @@ function logCheckpoint(table) {
 }
 
 /**
- * Download all snapshots saved by this extension.
+ * Send the checkpoint history to the active server
  */
-function downloadCheckpointHistories() {
-    chrome.storage.local.get([storageKey], (result) => {
-        let histories = result[storageKey]
-
-        console.log(result[storageKey])
-        csvHistories = histories.map(row => row.join(',')).join('\n');
-
-        const blob = new Blob([csvHistories], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = downloadFilename;
-        link.style.display = "none";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+function sendCheckpointHistory(checkpointHistory) {
+    fetch('http://localhost:2763/history', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checkpointHistory)
     })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Checkpoint history successfully sent.')
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 /**
@@ -85,13 +66,8 @@ function saveCallback() {
         })
 
         console.log("This game's checkpoint history: ", checkpointHistory)
-        appendToStorageArray(storageKey, checkpointHistory)
+        sendCheckpointHistory(checkpointHistory.map(row => row.join(',')).join('\n'))
 
-        chrome.storage.local.get([storageKey], (result) => {
-            console.log("Overall checkpoint history: ", result[storageKey])
-        })
-
-        downloadCheckpointHistories()
         checkpointHistory = []
     }
 }

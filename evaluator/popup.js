@@ -4,7 +4,11 @@ const thresholds = [5, 10, 20, 50, 100]
  * Take the ratio between two Yahtzee scores.
  */
 function getScoreRatio(diff) {
-    return 0.5 + diff / 20
+    let ratio = 0.5 + diff / 20
+
+    if (ratio > 1) return 1.0
+    if (ratio < 0) return 0.0
+    return ratio
 }
 
 function getPositionPhrase(scores, names) {

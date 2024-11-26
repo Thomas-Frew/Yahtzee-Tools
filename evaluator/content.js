@@ -38,7 +38,7 @@ function sendEvaluations(data, names) {
  * Send a request to the AI server to evaulate the game position.
  */
 function requestEvaluation(scorecards) {
-    fetch('http://localhost:2763', {
+    fetch('http://localhost:2763/evaluate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
